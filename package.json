@@ -1,0 +1,22 @@
+{
+  "name": "ratemyschedule",
+  "version": "1.0.0",
+  "description": "Social scheduling app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sokolowski123/Rate-My-Schedule.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sokolowski123/Rate-My-Schedule/issues"
+  },
+  "homepage": "https://github.com/sokolowski123/Rate-My-Schedule#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
