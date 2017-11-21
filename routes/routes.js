@@ -9,5 +9,10 @@ module.exports = function(app) {
 		res.render('../views/main.ejs');
 	});
 
+	app.get( '/write_review', function(req, res) {
+		console.log("Go to review");
+		res.render('../views/write_review.ejs');
+	});
+
 
 }
