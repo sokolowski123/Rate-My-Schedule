@@ -4,6 +4,18 @@
 
 <body>
 	<h3> Welcome to Rate My Schedule! </h3>
+	<input type="text" id="search_classes">
+
+	<h2><%= JSON.stringify(rows) %></h2>
+	<% for(var i=0; i<rows.length; i++) {%>
+		<h1> <%= rows[i].class %> </h1>
+		<h1> <%= rows[i].title %> </h1>
+		<h1> <%= rows[i].score %> </h1>
+		<% if (rows[i].description == null) { %>
+			<h1> GOT A NULL </h1>
+		<% } %>
+		<h1> <%= rows[i].description %> </h1>
+	<% } %>
 </body>
 	
 </html>

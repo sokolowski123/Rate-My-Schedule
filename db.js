@@ -17,7 +17,9 @@ con.connect(function(err, data)
     else
     {
         console.log("success connection to db");
-        console.log(data);
+        //console.log(data);
+        //var rows = JSON.stringify(data);
+        //console.log(rows);
     }
 });
 
