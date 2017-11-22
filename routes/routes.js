@@ -4,9 +4,15 @@ module.exports = function(app) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true }));
 	console.log("outside!");
+	g
 	app.get('/', function(req, res) {
 		console.log("Go to main!");
 		res.render('../views/main.ejs');
+	});
+
+	app.get('/view_schedule', function(req, res) {
+		console.log("Viewing the user schedule");
+		res.render('../views/view_scheulde.ejs');
 	});
 
 	app.get( '/write_review', function(req, res) {
