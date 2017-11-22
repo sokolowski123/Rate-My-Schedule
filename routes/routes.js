@@ -4,7 +4,7 @@ module.exports = function(app) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true }));
 	console.log("outside!");
-	g
+	
 	app.get('/', function(req, res) {
 		console.log("Go to main!");
 		res.render('../views/main.ejs');
@@ -19,6 +19,5 @@ module.exports = function(app) {
 		console.log("Go to review");
 		res.render('../views/write_review.ejs');
 	});
-
 
 }
