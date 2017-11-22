@@ -9,7 +9,7 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 		console.log("Go to main!");
 		//res.render('../views/main.ejs');
-		db.query('SELECT * FROM review', function(err, result) {
+		db.query('SELECT number, name, professor FROM classes', function(err, result) {
 			if (err) {
 				console.log(err);
 			}
