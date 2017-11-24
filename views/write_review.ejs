@@ -2,7 +2,7 @@
 <head>
 
 </head>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
 <h3> Rate My Schedule </h3>
 <h3> Write A Review </h3><br>
@@ -40,15 +40,31 @@ function sendReview() {
 	var desc = document.getElementById("desc").value;
 	
 	if (classname == "" || prof == "" || title == "" || score == "" || desc == "") {
-		//console.log("asdfadsf");
 		alert("Please fill out all of the fields")
-		//return;
 	} else {
-
+		var urluse = '/sendreview?classname=' + classname + "&title=" + title + "&prof=" + prof + "&score=" + score + "&desc=" + desc;
+		//console.log(url);
+		$.ajax({
+			//url : '/post_review?classname=' + classname + "&title=" + title + "&prof=" + prof + "&score=" + score + "&desc=" + desc,
+			//url : url,
+			url: urluse,
+			type: 'post',
+			success: function(response) {
+				//console.log(url);
+				alert("Review Added!");
+				window.location.href="http://localhost:8080/";
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				console.log(errorThrown);
+			}
+		});		
 	}
 }
 
 </script>
+
+
+
 
 
 <!--
