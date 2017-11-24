@@ -21,13 +21,20 @@
 	<!--populates a list of the existing classes that will autocomplete upon typing-->
 	<datalist id="classes">
 	<% for(var i=0; i<rows.length; i++) {%>
-		<% var class_for_list = rows[i].name + ' ' + rows[i].professor %>
+		<% var class_for_list = rows[i].number + '\ ' + rows[i].name + '\ ' + rows[i].professor %>
 		<!--<option value= <%= class_for_list %> />-->
-		<option value=<%= rows[i].number %>><%= class_for_list %></option>
+		<option value=<%= class_for_list %> />
 	<% } %>
 	</datalist>
 
 	<input type="text" id="class_list" list="classes" size="50" />
+	<button type="button" onClick="myFunction()">Add to Schedlue</button>
+
+	<script>
+		function myFunction() {
+			console.log(document.getElementById("class_list").value;
+		}
+	</script>
 
 </body>
 	
