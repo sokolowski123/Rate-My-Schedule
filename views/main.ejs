@@ -7,7 +7,7 @@
 
 <body>
 	<h3> Welcome to Rate My Schedule! </h3>
-	<input id="classInput" />
+	<input id="classInput" placeholder="Find a class" />
 
 	<script>
 	var input = document.getElementById("classInput");
@@ -27,6 +27,13 @@
 			}
 		});
 	});
+	</script>
+
+	<script>
+		window.addEventListener("awesomplete-selectcomplete", function(e){
+			$("#classInput").val("");  
+  			console.log(e.text.value);
+	}, false);
 	</script>
 
 </body>
