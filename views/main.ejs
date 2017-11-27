@@ -1,13 +1,43 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
+	<link rel="stylesheet" href="main-styles.css">
 	<script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-	<h3> Welcome to Rate My Schedule! </h3>
+	<h3 id="testing"> Welcome to Rate My Schedule! </h3>
 	<input id="classInput" placeholder="Find a class" />
+
+	<div id="schedule-header">
+		<h5>My Schedule</h5>
+		<h5>Average Difficulty</h5>
+	</div>
+
+	<div id="schedule-placeholer">
+		<p>Search for a class to add to your schedule to begin</p>
+	</div>
+	<table id="schedule" style="display: none">
+		<tr>
+			<th class="leftCol">Class</th>
+			<th class="centerCol">Professor</th>
+			<th class="rightCol">Score</th>
+		</tr>
+	</table>
+
+	<!--<div id="schedule" style="display: none">
+		<div class="schedule-body">
+			<p>this is a filler class</p>
+		</div>
+		<div class="schedule-body">
+			<p>this is a filler prof</p>
+		</div>
+		<div class="schedule-body">
+			<p>this is a filler score</p>
+		</div>
+	</div>-->
+
 
 	<script>
 	var input = document.getElementById("classInput");
@@ -31,7 +61,61 @@
 
 	<script>
 		window.addEventListener("awesomplete-selectcomplete", function(e){
-			$("#classInput").val("");  
+			$("#classInput").val("");
+			var x = document.getElementById("schedule-placeholer");
+			var y = document.getElementById("schedule");
+
+			var tempString = e.text.value.split(" | ");
+			var classProf = tempString[1];
+			tempString = tempString[0].split(" ");
+			var classNum = tempString[0];
+			var className = "";
+			for (var i = 1; i < tempString.length; i++) {
+				className += tempString[i];
+				if ( i != tempString.length ) {
+					className += " ";
+				} 
+			}
+			var classScore = 5;
+			var data;
+
+			data = "<tr>" +
+						"<td class=\"leftCol\">" +  "<h1>" + classNum + "</h1>" +
+				   				  "<p>" + className + "</p>" + 
+		   				"</td>" +
+		   				"<td class=\"centerCol\">" + "<h1>" + classProf + "</h1>" +
+		   				"</td>" + 
+		   				"<td class=\"rightCol\">" + "<h1>" + classScore + "</h1>" +
+		   				"</td>" +  
+	   				"</tr>";
+
+			/*data = "<div class=\"schedule-body\">" + 
+						"<h1>" + classNum + "</h1>" +
+				   		"<p>" + className + "</p>" +
+					"</div>" +
+					"<div class=\"schedule-body\">" + 
+						"<h1>" + classProf + "</h1>" +
+					"</div>" +
+					"<div class=\"schedule-body\">" +
+						 "<h1>" + classScore + "</h1>" +
+					"</div>";*/
+			$("#schedule").append(data);
+
+
+			/*data = "<h1>" + classNum + "</h1>" +
+				   "<p>" + className + "</p>";
+			$("#schedule-class").append(data);
+
+			data = "<h1>" + classProf + "</h1>";
+			$("#schedule-prof").append(data);
+
+			data = "<h1>" + classScore + "</h1>";
+			$("#schedule-score").append(data);*/
+
+    		if (x.style.display != "none") {
+       			x.style.display = "none";
+       			y.style.display = "flex";
+    		}
   			console.log(e.text.value);
 	}, false);
 	</script>
