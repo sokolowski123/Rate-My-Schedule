@@ -8,8 +8,8 @@ module.exports = function(app) {
 	var obj = {};
 	app.get('/', function(req, res) {
 		console.log("Go to main!");
-		//res.render('../views/main.ejs');
-		db.query('SELECT number, name, professor FROM classes', function(err, result) {
+		res.render('../views/main.ejs');
+		/*db.query('SELECT number, name, professor FROM classes', function(err, result) {
 			if (err) {
 				console.log(err);
 			}
@@ -17,9 +17,20 @@ module.exports = function(app) {
 				for (x in result) {
 					console.log(result[x]);
 				}
-				var rows = result;
+				var rows = JSON.stringify(result);
 				res.render('../views/main.ejs', {rows: rows});
 
+			}
+		});*/
+	});
+	app.get('/get-classes', function(req, res) {
+		console.log("got the request");
+		db.query('SELECT number, name, professor FROM classes', function(err, result) {
+			if (err) {
+				console.log(err);
+			}
+			else {
+      			res.json(result);
 			}
 		});
 	});

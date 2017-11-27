@@ -1,39 +1,32 @@
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
+	<script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
 	<h3> Welcome to Rate My Schedule! </h3>
-
-	<!--<h2><%= JSON.stringify(rows) %></h2>
-	<% for(var i=0; i<rows.length; i++) {%>
-		<% var class_for_list = rows[i].class %>
-		<option value=class_for_list>
-		<h1> <%= rows[i].class %> </h1>
-		<h1> <%= rows[i].title %> </h1>
-		<h1> <%= rows[i].score %> </h1>
-		<% if (rows[i].description == null) { %>
-			<h1> GOT A NULL </h1>
-		<% } %>
-		<h1> <%= rows[i].description %> </h1>
-	<% } %>-->
-
-	<!--populates a list of the existing classes that will autocomplete upon typing-->
-	<datalist id="classes">
-	<% for(var i=0; i<rows.length; i++) {%>
-		<% var class_for_list = rows[i].number + '\ ' + rows[i].name + '\ ' + rows[i].professor %>
-		<!--<option value= <%= class_for_list %> />-->
-		<option value=<%= class_for_list %> />
-	<% } %>
-	</datalist>
-
-	<input type="text" id="class_list" list="classes" size="50" />
-	<button type="button" onClick="myFunction()">Add to Schedlue</button>
+	<input id="classInput" />
 
 	<script>
-		function myFunction() {
-			console.log(document.getElementById("class_list").value;
-		}
+	var input = document.getElementById("classInput");
+	var a = new Awesomplete(input);
+
+	var classList = [""];
+	$(document).ready(function() {
+		$.ajax({
+			url: '/get-classes',
+			type: 'GET',
+			success: function(response) {
+				for (var i = 0; i < response.length; i++) {
+					var currClass = response[i].number + " " + response[i].name + " | " + response[i].professor;
+					classList.push(currClass);
+				}
+				a.list = classList;
+			}
+		});
+	});
 	</script>
 
 </body>
