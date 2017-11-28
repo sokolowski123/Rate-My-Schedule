@@ -79,7 +79,9 @@
 			var classScore = 5;
 			var data;
 
-			data = "<tr>" +
+
+
+			data = "<tr onclick=\"clickedClass('/view_class?name=" + className + "&number=" + classNum + "&professor= " + classProf + "')\">" +
 						"<td class=\"leftCol\">" +  "<h1>" + classNum + "</h1>" +
 				   				  "<p>" + className + "</p>" + 
 		   				"</td>" +
@@ -118,6 +120,12 @@
     		}
   			console.log(e.text.value);
 	}, false);
+	</script>
+	<script>
+		function clickedClass(route) {
+			document.location.href = route;
+			console.log("clicked class");
+		}
 	</script>
 
 </body>

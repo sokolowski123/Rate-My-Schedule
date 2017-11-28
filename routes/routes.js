@@ -35,9 +35,28 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/view_schedule', function(req, res) {
-		console.log("Viewing the user schedule");
-		res.render('../views/view_schedule.ejs');
+	app.get('/view_class', function(req, res) {
+		console.log("Viewing the selected class");
+		var number = req.query.number;
+		var name  = req.query.name;
+		var prof = req.query.professor;
+		console.log("num " + number);
+		console.log("name " + name);
+		console.log("prof " + prof);
+
+		var sql = "SELECT cid FROM classes WHERE number=?";
+
+		db.query(sql, number, function(err, result) {
+			if (err) {
+				console.log(err);
+			}
+			else {
+				var cid = result[0].cid
+				console.log("result " + cid);
+				res.render('../views/view_class.ejs', {classId: cid});
+			}
+		});
+		//res.render('../views/view_class.ejs', {classId: cid});
 	});
 
 	app.get( '/write_review', function(req, res) {
