@@ -73,15 +73,30 @@ module.exports = function(app) {
                 var score = req.query.score;
                 var desc = req.query.desc;
                 var query = "insert into review (class, title, prof, score, description) values ('" + classname + "', '" + title + "', '" + prof + "', '" + score + "', '" + desc + "')";
-                console.log("query: " + query);
-		db.query(query, function(err, result) {
-			if (err) {
-				console.log("Error with query");
-			} else {
-				console.log("Added review to db");
-				res.status(200).json({status: "ok"});
-			}
+                var query2 = "select * from classes where number='" + classname + "'";
+		var query3 = "insert into classes (number, name, professor) values ('" + classname + "', \"\", \"\")";
+		console.log("query: " + query3);
+		
+		db.query(query2, function(err, result) {
+			if (result[0] == undefined) {
+				db.query(query3, function(err, result) {
+					if (err) {
+						console.log("error!");
+					} else {
+						console.log("Class added!");
+					}
+				});
+			}			
 		});
+		
+			db.query(query, function(err, result) {
+				if (err) {
+					console.log("Error with query");
+				} else {
+					console.log("Added review to db");
+					res.status(200).json({status: "ok"});
+				}
+			});
 	});
 
 }
