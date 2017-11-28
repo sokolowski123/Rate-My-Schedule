@@ -18,3 +18,7 @@ table {
 	text-align: right;
 	width: 1%;
 }
+
+.form-control {
+	width: 35%;
+}
