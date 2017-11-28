@@ -64,35 +64,28 @@ module.exports = function(app) {
 		res.render('../views/write_review.ejs');
 	});
 		
-	/*
-	app.post('post_review', function(req, res) {
-		console.log("woooo");
-		var classname = req.query.classname;
-		var title = req.query.title;
-		var prof = req.query.prof;
-		var score = req.query.score;
-		var desc = req.query.desc;
-		var query = "insert into review (class, title, prof, score, description) values ('" + classname + "', '" + title + "', '" + prof + "', '" + score + "', '" + desc + "')";
-		console.log("query: " + query);
-		db.query(query, function(err, res) {
-			if (err) {
-				throw err;
-			} else {
-				console.log("Added review to db");
-				res.status(200).json({status: "ok"});
-			}				
-		}); 
-	});
-	*/
 	app.post('/sendreview', function(req, res) {
-		console.log("woooo");
                 var classname = req.query.classname.toUpperCase();
                 var title = req.query.title;
                 var prof = req.query.prof;
                 var score = req.query.score;
                 var desc = req.query.desc;
                 var query = "insert into review (class, title, prof, score, description) values ('" + classname + "', '" + title + "', '" + prof + "', '" + score + "', '" + desc + "')";
-                console.log("query: " + query);
+                var query2 = "select * from classes where number='" + classname + "'";
+		var query3 = "insert into classes (number, name, professor) values ('" + classname + "', \"\", \"\")";
+		
+		db.query(query2, function(err, result) {
+			if (result[0] == undefined) {
+				db.query(query3, function(err, result) {
+					if (err) {
+						console.log("error!");
+					} else {
+						console.log("Class added!");
+					}
+				});
+			}			
+		});
+		
 		db.query(query, function(err, result) {
 			if (err) {
 				console.log("Error with query");
