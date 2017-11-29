@@ -1,24 +1,33 @@
-<html>
+<!DOCTYPE html>
+<html style="height: 100%; width: 100%; background-color: #FFD700;">
 <head>
-	<link rel="stylesheet" href="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
+
+	       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
 	<link rel="stylesheet" href="main-styles.css">
 	<script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+<body style="height: 90%;">
+<div style="background-color: #333; margin-top:1%; height: 107%">
 
-<body>
-	<h3 id="testing"> Welcome to Rate My Schedule! </h3>
-	<input id="classInput" placeholder="Find a class" />
+	<!--<body style="background-color: #333; margin-top:1%;">-->
+	<a href = "http://localhost:8080/">
+	<img style="margin-left: 45.5%;" src="/1j+ojl1FOMkX9WypfBe43D6kjfCAqBBLnBzJwXs1M3EMoAJtlSEsjvtj...jpeg"></img>
+	</a>
 
-	<div id="schedule-header">
+	<!--<h3 id="testing"> Welcome to Rate My Schedule! </h3> -->
+	<input id="classInput" class="form-control" placeholder="Find a class" />
+
+	<div style="margin-top: 3%; color: white; margin-left: 45.5%;"id="schedule-header">
 		<h5>My Schedule</h5>
 		<h5>Average Difficulty</h5>
 	</div>
 
-	<div id="schedule-placeholer">
+	<div id="schedule-placeholer" style="margin-left: 42%; color: white;">
 		<p>Search for a class to add to your schedule to begin</p>
 	</div>
-	<table id="schedule" style="display: none">
+	<table id="schedule" style="display:none;">
 		<tr>
 			<th class="leftCol">Class</th>
 			<th class="centerCol">Professor</th>
@@ -37,7 +46,7 @@
 			<p>this is a filler score</p>
 		</div>
 	</div>-->
-
+<div>
 
 	<script>
 	var input = document.getElementById("classInput");

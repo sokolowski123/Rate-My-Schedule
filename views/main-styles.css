@@ -2,23 +2,36 @@ table {
     table-layout: fixed;
     margin-left: 15%;
     margin-right: 15%;
+    border: 1px solid;
 }
 
 .leftCol {
+	border: 1px solid;
+	border-color: #FFD700;
 	text-align: left;
 	width: 1%;
+	color: white;
 }
 
 .centerCol {
+	border: 1px solid;
+	border-color: #FFD700;
 	text-align: center;
 	width: 1%;
+	color: white;
 }
 
 .rightCol {
+	border: 1px solid;
+	border-color: #FFD700;
 	text-align: right;
 	width: 1%;
+	color: white;
 }
-
 .form-control {
-	width: 35%;
+	
+	width: 100%;
+	position: relative;
+	margin-left: -96%;
+	top: 60px;
 }
