@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body style="height: 90%;">
-<div style="background-color: #333; margin-top:1%; height: 107%">
+<div style="background-color: #333; margin-top:1%; height: 106.65%">
 
 	<!--<body style="background-color: #333; margin-top:1%;">-->
 	<a href = "http://localhost:8080/">
@@ -26,6 +26,7 @@
 
 	<div id="schedule-placeholer" style="margin-left: 42%; color: white;">
 		<p>Search for a class to add to your schedule to begin</p>
+		<p> You can add up to 6 classes to your schedule </p>
 	</div>
 	<table id="schedule" style="display:none;">
 		<tr>
@@ -46,6 +47,7 @@
 			<p>this is a filler score</p>
 		</div>
 	</div>-->
+	<button type="button" class="btn btn-default" style="margin-left:47.5%; margin-top: 3%;"> <a href="http://localhost:8080/write_review"> Write Review </a> </button>
 <div>
 
 	<script>
@@ -110,7 +112,10 @@
 					"<div class=\"schedule-body\">" +
 						 "<h1>" + classScore + "</h1>" +
 					"</div>";*/
-			$("#schedule").append(data);
+			//console.log(document.getElementById("schedule").rows.length);
+			if (document.getElementById("schedule").rows.length <= 6) {
+				$("#schedule").append(data);
+			}	
 
 
 			/*data = "<h1>" + classNum + "</h1>" +
@@ -119,7 +124,7 @@
 
 			data = "<h1>" + classProf + "</h1>";
 			$("#schedule-prof").append(data);
-
+s
 			data = "<h1>" + classScore + "</h1>";
 			$("#schedule-score").append(data);*/
 

@@ -1,6 +1,10 @@
+h1 {
+    font-size: 20px;
+}
+
 table {
     table-layout: fixed;
-    margin-left: 15%;
+    margin-left: 13%;
     margin-right: 15%;
     border: 1px solid;
 }
@@ -8,7 +12,7 @@ table {
 .leftCol {
 	border: 1px solid;
 	border-color: #FFD700;
-	text-align: left;
+	text-align: center;
 	width: 1%;
 	color: white;
 }
@@ -24,7 +28,7 @@ table {
 .rightCol {
 	border: 1px solid;
 	border-color: #FFD700;
-	text-align: right;
+	text-align: center;
 	width: 1%;
 	color: white;
 }

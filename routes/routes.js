@@ -1,6 +1,7 @@
 module.exports = function(app) {
 	var db = require('../db');
 	var bodyParser = require('body-parser');
+	var passhash = require('bcryptjs');
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true }));
 	console.log("outside!");
@@ -8,7 +9,7 @@ module.exports = function(app) {
 	var obj = {};
 	app.get('/', function(req, res) {
 		console.log("Go to main!");
-		res.render('../views/main.ejs');
+		res.render('../views/login.ejs');
 		/*db.query('SELECT number, name, professor FROM classes', function(err, result) {
 			if (err) {
 				console.log(err);
@@ -23,6 +24,68 @@ module.exports = function(app) {
 			}
 		});*/
 	});
+	app.get('/createAccount', function(req, res) {
+		res.render("../views/createAccount.ejs");
+	})
+
+	app.get('/main', function(req, res) {
+		res.render("../views/main.ejs");
+	});
+
+	app.get('/adduser/:user/:pass', function(req, res) {
+		var user = req.params.user;
+		var pass = req.params.pass;
+
+		var salt = passhash.genSaltSync(10);		
+	
+		var query = "select * from users where username='" + user + "'";
+		var hashedpass = passhash.hashSync(pass, salt);
+		
+		console.log("hashed1: " + hashedpass);
+		var query2 = "insert into users (username, password) values ('" + user + "', '" + hashedpass + "')";
+
+		db.query(query, function(err, result) {
+			if (result[0] != undefined) {
+				res.status(500).send({error: "User already exists!"});
+			} else {
+				db.query(query2, function(err, result) {
+					if (err) {
+						throw err;
+					} else {
+						res.render("../views/main.ejs");
+					}
+				});
+			}
+		});
+	});
+	
+	app.get('/login/:user/:pass', function(req, res) {
+		var user = req.params.user;
+		var pass = req.params.pass;
+
+		
+
+		//var hashedpass = passhash.hash(pass, 10);
+		//var hashedpass = passhash.generate(pass);
+		//console.log("hashed: " + passhash.hash(pass, 10));
+		var query = "select * from users where username='" + user + "'";
+		//var query2 = "insert into users (username, passsword) values ('" + user + "', '" + hash + "')"; 
+		db.query(query, function(err, result) {
+			if (result[0] == undefined) {
+				//throw new Error("user does not exist!");
+				res.status(500).send({error: "User does not exist!"});	
+			} else {
+				console.log("db: " + passhash.compareSync(pass, result[0].password));
+				if (passhash.compareSync(pass, result[0].password)) {
+					res.status(200).send({ok: "valid user info"});
+				} else {
+					res.status(500).send({error: "Invalid user login info!"});
+				}
+			}
+		});
+		
+	});
+
 	app.get('/get-classes', function(req, res) {
 		console.log("got the request");
 		db.query('SELECT number, name, professor FROM classes', function(err, result) {
