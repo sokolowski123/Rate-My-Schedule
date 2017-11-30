@@ -86,6 +86,30 @@ module.exports = function(app) {
 		
 	});
 
+	app.get('/get-cid', function(req, res) {
+		console.log("get cid");
+		var number = req.query.number;
+		var name = req.query.name;
+		var prof = req.query.professor;
+		console.log(number);
+		console.log(name);
+		console.log(prof);
+		var query = "SELECT cid FROM classes WHERE number='" + number + "' AND name='" + name + "' AND professor='" + prof + "'";
+		console.log(query);
+
+		db.query(query, function(err, result) {
+			res.json(result);
+		});
+	});
+
+	app.get('/get-score', function(req, res) {
+		var cid = req.query.cid;
+		var query = "SELECT AVG(score) AS avg FROM reviews WHERE class_id='" + cid + "'";
+		db.query(query, function(err, result) {
+			res.json(result);
+		});
+	});
+
 	app.get('/get-classes', function(req, res) {
 		console.log("got the request");
 		db.query('SELECT number, name, professor FROM classes', function(err, result) {
@@ -114,7 +138,7 @@ module.exports = function(app) {
 				console.log(err);
 			}
 			else {
-				var cid = result[0].cid
+				var cid = result[0].cid;
 				console.log("result " + cid);
 				res.render('../views/view_class.ejs', {classId: cid});
 			}

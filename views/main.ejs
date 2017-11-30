@@ -84,6 +84,11 @@
 	</script>
 
 	<script>
+		function getScore() {}
+	</script>
+
+
+	<script>
 		window.addEventListener("awesomplete-selectcomplete", function(e){
 			$("#classInput").val("");
 			var x = document.getElementById("schedule-placeholer");
@@ -100,145 +105,48 @@
 					className += " ";
 				} 
 			}
-			var classScore = 5;
+
+			var classScore;
 			var data;
 
+			$.ajax({
+				url: "/get-cid?name="+className+"&number="+classNum+"&professor="+classProf,
+				type: 'GET',
+				success: function(response) {
+					var cid = response[0].cid;
+					console.log(response[0].cid);
 
+					$.ajax({
+						url: "/get-score?cid="+cid,
+						type: 'GET',
+						success: function(response) {
+							classScore = response[0].avg;
 
-			data = "<tr onclick=\"clickedClass('/view_class?name=" + className + "&number=" + classNum + "&professor= " + classProf + "')\">" +
-						"<td class=\"leftCol\">" +  "<h1>" + classNum + "</h1>" +
-				   				  "<p>" + className + "</p>" + 
-		   				"</td>" +
-		   				"<td class=\"centerCol\">" + "<h1>" + classProf + "</h1>" +
-		   				"</td>" + 
-		   				"<td class=\"rightCol\">" + "<h1>" + classScore + "</h1>" +
-		   				"</td>" +  
-	   				"</tr>";
+							data = "<tr onclick=\"clickedClass('/view_class?name=" + className + "&number=" + classNum + "&professor= " + classProf + "')\">" +
+										"<td class=\"leftCol\">" +  "<h1>" + classNum + "</h1>" +
+								   				  "<p>" + className + "</p>" + 
+						   				"</td>" +
+						   				"<td class=\"centerCol\">" + "<h1>" + classProf + "</h1>" +
+						   				"</td>" + 
+						   				"<td class=\"rightCol\">" + "<h1>" + classScore + "</h1>" +
+						   				"</td>" +  
+					   				"</tr>";
 
-			/*data = "<div class=\"schedule-body\">" + 
-						"<h1>" + classNum + "</h1>" +
-				   		"<p>" + className + "</p>" +
-					"</div>" +
-					"<div class=\"schedule-body\">" + 
-						"<h1>" + classProf + "</h1>" +
-					"</div>" +
-					"<div class=\"schedule-body\">" +
-						 "<h1>" + classScore + "</h1>" +
-					"</div>";*/
-			//console.log(document.getElementById("schedule").rows.length);
-			if (document.getElementById("schedule").rows.length <= 6) {
-				$("#schedule").append(data);
-			}	
+			   				if (document.getElementById("schedule").rows.length <= 6) {
+								$("#schedule").append(data);
+							}
 
+							if (x.style.display != "none") {
+				       			x.style.display = "none";
+				       			y.style.display = "flex";
+				    		}
+				  			console.log(e.text.value);	
+						}
+					});
 
-			/*data = "<h1>" + classNum + "</h1>" +
-				   "<p>" + className + "</p>";
-			$("#schedule-class").append(data);
-
-			data = "<h1>" + classProf + "</h1>";
-			$("#schedule-prof").append(data);
-s
-			data = "<h1>" + classScore + "</h1>";
-			$("#schedule-score").append(data);*/
-
-    		if (x.style.display != "none") {
-       			x.style.display = "none";
-       			y.style.display = "flex";
-    		}
-  			console.log(e.text.value);
-
-
-			console.log( e.target.id );
-			/*if ( e.target.id == "classSearch" ) {
-				console.log( "doing something different" );
-				$("#classSearch").val("");
-				var x = document.getElementById("schedule-placeholer");
-				var y = document.getElementById("schedule");
-
-				var tempString = e.text.value.split(" | ");
-				var classProf = tempString[1];
-				tempString = tempString[0].split(" ");
-				var classNum = tempString[0];
-				var className = "";
-				for (var i = 1; i < tempString.length; i++) {
-					className += tempString[i];
-					if ( i != tempString.length ) {
-						className += " ";
-					} 
 				}
-				var classScore = 5;
-				
-				$.ajax({
-					url: '/write_review',
-					type: 'GET',
-					success: function(response) {
-						window.location.href = response.redirect;
-					}
-				});
-				document.location.href = '/write_review';
+			});
 
-			}*/
-
-			//else if ( e.target.id == "classInput" ) {
-
-				$("#classInput").val("");
-				var x = document.getElementById("schedule-placeholer");
-				var y = document.getElementById("schedule");
-
-				var tempString = e.text.value.split(" | ");
-				var classProf = tempString[1];
-				tempString = tempString[0].split(" ");
-				var classNum = tempString[0];
-				var className = "";
-				for (var i = 1; i < tempString.length; i++) {
-					className += tempString[i];
-					if ( i != tempString.length ) {
-						className += " ";
-					} 
-				}
-				var classScore = 5;
-				var data;
-
-				data = "<tr onclick=\"clickedClass('/view_class?name=" + className + "&number=" + classNum + "&professor= " + classProf + "')\">" +
-							"<td class=\"leftCol\">" +  "<h1>" + classNum + "</h1>" +
-					   				  "<p>" + className + "</p>" + 
-			   				"</td>" +
-			   				"<td class=\"centerCol\">" + "<h1>" + classProf + "</h1>" +
-			   				"</td>" + 
-			   				"<td class=\"rightCol\">" + "<h1>" + classScore + "</h1>" +
-			   				"</td>" +  
-		   				"</tr>";
-
-				/*data = "<div class=\"schedule-body\">" + 
-							"<h1>" + classNum + "</h1>" +
-					   		"<p>" + className + "</p>" +
-						"</div>" +
-						"<div class=\"schedule-body\">" + 
-							"<h1>" + classProf + "</h1>" +
-						"</div>" +
-						"<div class=\"schedule-body\">" +
-							 "<h1>" + classScore + "</h1>" +
-						"</div>";*/
-				$("#schedule").append(data);
-
-
-				/*data = "<h1>" + classNum + "</h1>" +
-					   "<p>" + className + "</p>";
-				$("#schedule-class").append(data);
-
-				data = "<h1>" + classProf + "</h1>";
-				$("#schedule-prof").append(data);
-
-				data = "<h1>" + classScore + "</h1>";
-				$("#schedule-score").append(data);*/
-
-	    		if (x.style.display != "none") {
-	       			x.style.display = "none";
-	       			y.style.display = "flex";
-	    		}
-	  			console.log(e.text.value);
-
-	  		//}
 	}, false);
 	</script>
 	<script>
