@@ -21,11 +21,15 @@
 
 	<!--<input id="classSearch" class="form-control" placeholder="Search for a class" />-->
 
-	<button onclick="writeReview()">Write a Review</button>
+	<button class="btn btn-default"  onclick="writeReview()">Write a Review</button>
 
 	<script>
 		function writeReview() {
-			document.location.href = '/write_review';
+			var urls = window.location;
+        	        var url = new URL(urls);
+ 	               var user = url.searchParams.get("user");
+
+			document.location.href = '/write_review?user=' + user;
 		}
 	</script>
 
@@ -57,7 +61,7 @@
 			<p>this is a filler score</p>
 		</div>
 	</div>-->
-	<button type="button" class="btn btn-default" style="margin-left:47.5%; margin-top: 3%;"> <a href="http://localhost:8080/write_review"> Write Review </a> </button>
+	<button type="button"  class="btn btn-default" style="margin-left:47.5%; margin-top: 3%;"> <a id="reviewbutton" href="http://localhost:8080/write_review"> Write Review </a> </button>
 <div>
 
 	<script>

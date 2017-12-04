@@ -56,7 +56,7 @@
 				type: 'get',
 				success: function(resposnse) {
 					alert("Account successfuly created!");
-					window.location.href="http://localhost:8080/main";
+					window.location.href="http://localhost:8080/main?user=" + user;
 				},
 				error: function(response) {
 					alert("User already exists! Please choose a different username.");

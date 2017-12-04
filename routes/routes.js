@@ -7,6 +7,11 @@ module.exports = function(app) {
 	console.log("outside!");
 	
 	var obj = {};
+	app.get('/main', function(req, res) {
+		console.log("going to maaain");
+		res.render("../views/main.ejs");
+	});
+
 	app.get('/', function(req, res) {
 		console.log("Go to main!");
 		res.render('../views/login.ejs');
@@ -27,11 +32,11 @@ module.exports = function(app) {
 	app.get('/createAccount', function(req, res) {
 		res.render("../views/createAccount.ejs");
 	})
-
+	/*
 	app.get('/main', function(req, res) {
-		res.render("../views/main.ejs");
+		res.render("../views/main.ejs?user");
 	});
-
+*/
 	app.get('/adduser/:user/:pass', function(req, res) {
 		var user = req.params.user;
 		var pass = req.params.pass;
@@ -189,6 +194,7 @@ module.exports = function(app) {
 											}
 											else {
 												console.log("added review");
+												res.status(200).send({ok: "added review"});
 											}
 										});
 									}
@@ -207,6 +213,7 @@ module.exports = function(app) {
 							}
 							else {
 								console.log("added review");
+								res.status(200).send({ok: "added review"});
 							}
 						});
 					}

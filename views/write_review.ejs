@@ -7,10 +7,23 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body style="background-color: #333; margin-top:1%;">
-<a href = "http://localhost:8080/">
+<a onClick="goback()" href = "http://localhost:8080">
 <img style="margin-left: 45.5%;" src="/1j+ojl1FOMkX9WypfBe43D6kjfCAqBBLnBzJwXs1M3EMoAJtlSEsjvtj...jpeg"></img>
 </a>
-<h3 style="margin-left: 45.75%; color: #FFD700;"> Write A Review </h3><br>
+<script>
+	function goback() {
+		//console.log("back!");
+		//alert("user");
+		var urls = window.location;
+                var url = new URL(urls);
+                var user = url.searchParams.get("user");
+		console.log("back");
+		window.history.back(); 
+		//window.location.href="http://localhost:8080/main";
+		//document.location.href = "http://localhost:8080/main";
+	}
+</script>
+<h3 style="margin-top: 0%; margin-left: 45.75%; color: #FFD700;"> Write A Review </h3><br>
 <form style="width: 20%; margin-left: 40%; color: #FFD700">
 	Class Name:<br>
 	<input type="text" id="class" class="form-control"><br>
@@ -60,7 +73,7 @@ function sendReview() {
 			success: function(response) {
 				//console.log(url);
 				alert("Review Added!");
-				window.location.href="http://localhost:8080/";
+				window.location.href="http://localhost:8080/main";
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log(errorThrown);

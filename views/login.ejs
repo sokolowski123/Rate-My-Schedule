@@ -14,7 +14,7 @@
 		<img style="margin-left: 45.5%;" src="/1j+ojl1FOMkX9WypfBe43D6kjfCAqBBLnBzJwXs1M3EMoAJtlSEsjvtj...jpeg"></img>
 		
 	
-	<h3 style="margin-left: 45.75%; color: #FFD700;"> Login </h3><br>
+	<h3 style="margin-left: 48.5%; color: #FFD700;"> Login </h3><br>
 <form style="width: 20%; margin-left: 40%; color: #FFD700">
         Username:<br>
         <input type="text" id="user" class="form-control"><br>
@@ -22,7 +22,7 @@
         Password:<br>
         <input type="password" id="pass" class="form-control"><br>
     	<br><br>
-	<button style="margin-left:35%; margin-top: -2%; margin-bottom: 1.8%;" onClick="loginUser()" class="btn btn-default" id="login" type="button"> Login </button>
+	<button style="margin-left:42.5%; margin-top: -2%; margin-bottom: 1.8%;" onClick="loginUser()" class="btn btn-default" id="login" type="button"> Login </button>
 	<br><br>
 	<button style="margin-left:35%; margin-top: -2%; margin-bottom: 1.8%;" onClick="create()" class="btn btn-default" id="login" type="button"> Create Account </button>
 
@@ -42,7 +42,7 @@
 			type: 'get',
 			processData: false,
 			success: function(respose) {
-				window.location.href="http://localhost:8080/main";	
+				window.location.href="http://localhost:8080/main?user=" + user;	
 			},
 
 			error: function(response) {
