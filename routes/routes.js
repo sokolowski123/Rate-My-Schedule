@@ -115,6 +115,15 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/get-reviews', function(req, res) {
+		var cid = req.query.classId;
+		console.log("get reviews for cid" + cid);
+		var query = "SELECT title, score, description FROM reviews WHERE class_id=" + cid;
+		db.query(query, function(err, result) {
+			res.json(result);
+		});
+	});
+
 	app.get('/get-classes', function(req, res) {
 		console.log("got the request");
 		db.query('SELECT number, name, professor FROM classes', function(err, result) {

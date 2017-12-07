@@ -10,6 +10,22 @@
 <a href = "http://localhost:8080">
 <img style="margin-left: 45.5%;" src="/1j+ojl1FOMkX9WypfBe43D6kjfCAqBBLnBzJwXs1M3EMoAJtlSEsjvtj...jpeg"></img>
 </a>
+
+<!--<h3 style="margin-left: 20%; color: #FFD700;"> 
+    Class Reviews for <script type="application/javascript">
+        //document.write(disp) </script></h3><br>-->
+<!--<form style="width: 20%; margin-left: 40%; color: #FFD700">
+        Class:<br>-->
+        
+</form>
+<table id="reviews" style="margin-left: 42%; color: #FFD700">
+	<tr>
+		<th id="reviews-header">Reviews</th>
+	</tr>
+</table>
+
+<!--<h3> Viewing the class <%= classId %></h3> -->
+
 <script>
 	var urls = window.location;
     var url = new URL(urls);
@@ -17,18 +33,41 @@
     var num = url.searchParams.get("number");
     var prof = url.searchParams.get("professor");
     var disp = num + " " + name + " " + "(" + prof + " )";
+
+    //console.log("blah" + document.getElementById("reviews-header").value);
+    $("#reviews-header").text("Reviews for " + disp); 
+
+    $(document).ready(function() {
+		$.ajax({
+			url: "/get-reviews?classId=" + <%= classId %>,
+			type: 'GET',
+			success: function(response) {
+				console.log("response" + response);
+				for (var i = 0; i < response.length; i++) {
+					var title = response[i].title;
+					var score = response[i].score;
+					var description = response[i].description;
+
+					var data = "<tr>" + "<td>" +
+									"<h3>" + title + " " + score + "</h3>" +
+									"<p>" + description + "</p>" +
+							   "</td>" + "</tr>";
+
+					$("#reviews").append(data);
+				}
+
+				if (document.getElementById("reviews").rows.length == 1) {
+					var data = "<tr>" + "<td>" +
+									"<p>" + "There are no reviews for this class currently.  If you have taken it, please consider leaving one." + "</p>" +
+							   "</td>" + "</tr>";
+							   $("#reviews").append(data);
+				} 
+			}
+		});
+	});
+
     console.log("display review");
 </script>
-<h3 style="margin-left: 20%; color: #FFD700;"> 
-    Class Reviews for <script type="application/javascript">
-        document.write(disp) </script></h3><br>
-<form style="width: 20%; margin-left: 40%; color: #FFD700">
-        Class:<br>
-        
-</form>
-
-
-<!--<h3> Viewing the class <%= classId %></h3> -->
 </body>
 	
 </html>
