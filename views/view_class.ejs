@@ -16,10 +16,10 @@
     var name = url.searchParams.get("name");
     var num = url.searchParams.get("number");
     var prof = url.searchParams.get("professor");
-    var disp = util.format('%s %s (%s)', num, name, prof);
+    var disp = num + " " + name + " " + "(" + prof + " )";
     console.log("display review");
 </script>
-<h3 style="margin-left: 45.75%; color: #FFD700;"> 
+<h3 style="margin-left: 20%; color: #FFD700;"> 
     Class Reviews for <script type="application/javascript">
         document.write(disp) </script></h3><br>
 <form style="width: 20%; margin-left: 40%; color: #FFD700">
