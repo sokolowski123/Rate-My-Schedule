@@ -32,10 +32,10 @@
 		}
 	</script>
 
-	<!--<div style="margin-top: 3%; color: white; margin-left: 45.5%;"id="schedule-header">
+	<div style="margin-top: 3%; color: white; margin-left: 45.5%;"id="schedule-header">
 		<h5>My Schedule</h5>
-		<h5>Average Difficulty</h5>
-	</div>-->
+		<h5>Average Difficulty: </h5><h5 id="schedAvg">0</h5>
+	</div>
 
 	<div id="schedule-placeholer" style="margin-left: 42%; margin-top: 3%; color: white;">
 		<p>Search for a class to add to your schedule to begin</p>
@@ -104,6 +104,8 @@
 				} 
 			}
 
+			//var avg = parseFloat($("#schedAvg").text());
+
 			var classScore;
 			var data;
 
@@ -120,6 +122,15 @@
 						success: function(response) {
 							classScore = response[0].avg;
 
+							//console.log("avg " + avg);
+							//console.log("class " + classScore);
+							//avg = avg / 5;
+							//console.log("new avg " + avg);
+							//avg += (classScore/5);
+							//console.log("new new avg " + avg);
+
+							//avg += classScore;
+
 							data = "<tr onclick=\"clickedClass('/view_class?name=" + className + "&number=" + classNum + "&professor= " + classProf + "')\">" +
 										"<td class=\"leftCol\">" +  "<h1>" + classNum + "</h1>" +
 								   				  "<p>" + className + "</p>" + 
@@ -130,8 +141,37 @@
 						   				"</td>" +  
 					   				"</tr>";
 
+
 			   				if (document.getElementById("schedule").rows.length <= 6) {
 								$("#schedule").append(data);
+
+								var count = 0;
+
+								//var avg = parseFloat($("#schedAvg").text());
+								var avg = 0;
+								avg = avg / 5;
+								$(".rightCol").each(function(i, score) {
+									if ( i != 0 ) {
+	    								console.log("here " + i + " " + score);
+	    								var temp = score.innerHTML;
+	    								console.log(temp);
+	    								var temp2 = temp.split("<h1>");
+	    								console.log(temp2);
+	    								var temp3 = temp2[1];
+	    								console.log(temp3);
+	    								var temp4 = temp3.charAt(0);
+	    								console.log(temp4);
+	    								var temp5 = temp4 / 5;
+	    								avg = avg + temp5;
+	    								count++;
+	    							}
+								});
+								avg = avg / count;
+								avg = avg * 5;
+								//avg = avg / (document.getElementById("schedule").rows.length - 1);
+								//avg = avg * 5;
+								//console.log("Avg " + avg);
+								$("#schedAvg").text(avg); 
 							}
 
 							if (x.style.display != "none") {
